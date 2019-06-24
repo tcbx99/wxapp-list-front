@@ -1,0 +1,52 @@
+<!--pages/lists/index/index.wxml-->
+<view class='page'>
+  <search-bar default-text="搜索" focus-text="任务名、创建者" bindsearch="onSearch" show-mask></search-bar>
+  <collapse title="我创建的清单" action-text="新建" bindtapaction="onCreateList">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator wx:for='{{ lists.owned }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <!-- Canvas Circle Here -->
+            <view class='canvasBox'>
+              <view class='bigCircle'></view>
+              <view class='littleCircle'></view>
+              <canvas canvas-id="rp_{{item.id}}" id="rp_{{item.id}}" class='canvas' />
+              <canvas canvas-id="rp2_{{item.id}}" id="rp2_{{item.id}}" class='canvas' />
+            </view>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{item.name}}</view>
+            <view class="weui-media-box__desc">这里还什么都没有</view>
+          </view>
+          <view class="ui-icon-more-area" data-type="owned" data-index="{{index}}" data-index="{{idx}}" catchtap="onShowActionSheet" hover-stop-propagation>
+            <image src="/assets/images/icon_more.png" mode="widthFix" class="ui-icon-more"></image>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </collapse>
+  <collapse title="我加入的清单">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator wx:for='{{ lists.joined }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <!-- Canvas Circle Here -->
+            <view class='canvasBox'>
+              <view class='bigCircle'></view>
+              <view class='littleCircle'></view>
+              <canvas canvas-id="rp_{{item.id}}" id="rp_{{item.id}}" class='canvas' />
+              <canvas canvas-id="rp2_{{item.id}}" id="rp2_{{item.id}}" class='canvas' />
+            </view>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{item.name}}</view>
+            <view class="weui-media-box__desc">这里还什么都没有</view>
+          </view>
+          <!-- view class="ui-icon-more-area" data-type="create" data-index="{{index}}" catchtap="onShowActionSheet" hover-stop-propagation>
+            <image src="/assets/images/icon_more.png" mode="widthFix" class="ui-icon-more"></image>
+          </view -->
+        </navigator>
+      </view>
+    </view>
+  </collapse>
+</view>

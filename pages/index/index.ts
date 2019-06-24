@@ -44,6 +44,7 @@ Page({
         }
       })
     }
+    wx.redirectTo({ url: '/pages/lists/index/index' })
   },
 
   getUserInfo(e: any) {
