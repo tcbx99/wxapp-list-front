@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/lists/index/index"
+    "pages/lists/index/index",
+    "pages/list-modify/list-modify",
+    "pages/list-modify/success"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",

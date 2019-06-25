@@ -1,0 +1,13 @@
+/* pages/list-modify/list-modify.wxss */
+@import "/styles/weui.wxss";
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 60%;
+}
+.weui-btn-area{
+  margin: 0 auto;
+   padding-top: 100px;
+   width: 60%;
+   color: gray;
+}

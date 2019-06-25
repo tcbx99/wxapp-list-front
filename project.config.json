@@ -21,5 +21,7 @@
 		"nodeModules": true
 	},
 	"appid": "wx08e8d81ed6a89ec4",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {}
 }
