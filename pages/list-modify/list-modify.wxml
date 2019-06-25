@@ -1,0 +1,33 @@
+<!--pages/list-modify/list-modify.wxml-->
+<view class="weui-cells__title">群组名称</view>
+<view class="weui-cell weui-cell_input">
+  <view class="weui-cell__hd">
+    <view class="weui-label">群组名称：</view>
+  </view>
+  <view class="weui-cell__bd">
+    <input class="weui-input" placeholder="请输入群组名称" bindinput="name"/>
+  </view>
+</view>
+<view class="weui-cells__title">群组介绍</view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+       <textarea class="weui-textarea" placeholder="请输入群组介绍" style="height: 6.3em" bindinput="text"/>
+     </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">备注：群组名称和介绍会被展示给其他用户。群组类型分为工作、学习和家庭，请合理选择。群组创建好后，分享到群里，使其他成员通过群内链接进入群组。您就可以开始为他们分配任务和管理进度了。
+  </view>
+  <view class="page__bd">
+    <view class="weui-btn-area">
+     <picker bindchange="bindPickerChange" range="{{array}}">
+        <button type="default">选择群组类型</button>
+     </picker>    
+   </view>
+  </view>        
+
+  <view class="button-sp-area">
+    <button class="weui-btn" type="primary" plain="true" bindtap="open" >创建
+    </button>
+  </view>
