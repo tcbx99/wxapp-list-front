@@ -1,33 +1,8 @@
 <!--pages/list-modify/success.wxml-->
 <view class="page">
-<<<<<<< HEAD
   <view class="weui-msg">
     <view class="weui-msg__icon-area">
       <icon type="success" size="93"></icon>
-=======
-    <view class="weui-msg">
-        <view class="weui-msg__icon-area">
-            <icon type="success" size="93"></icon>
-        </view>
-        <view class="weui-msg__text-area">
-            <view class="weui-msg__title">创建成功</view>
-            <view class="weui-msg__desc">群组名称：{{name}}</view>
-            <view class="weui-msg__desc">群组简介：{{text}}</view>
-            
-        </view>
-        <view class="weui-msg__opr-area">
-            <view class="weui-btn-area">
-                <button class="weui-btn" type="primary" open-type='share'>发送链接到群</button>
-                <button class="weui-btn" type="default" bindtap="back">返回主界面</button>
-            </view>
-        </view>
-        <view class="weui-msg__extra-area">
-            <view class="weui-footer">
-                
-                <view class="weui-footer__text">欢迎开始使用{{name}}群组！</view>
-            </view>
-        </view>
->>>>>>> 2b6339e7aa9bef3f6eaec0154902b09fd6ab72c2
     </view>
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">{{ is_create ? "创建" : "修改" }}成功</view>
