@@ -7,13 +7,14 @@
     "pages/list-modify/success",
     "pages/mission-modify/mission-modify",
     "pages/mission-modify/success",
-    "pages/welcome/welcome-list",
-    "pages/welcome/welcome-first"
+    "pages/welcome/welcome-first",
+    "pages/welcome/welcome-list"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",
     "backgroundColor": "#f8f8f8",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

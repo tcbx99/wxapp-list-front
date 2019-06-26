@@ -1,24 +1,40 @@
 <!--pages/welcome/welcome-first.wxml-->
 <view class="page">
-    <view class="weui-msg">
-        <view class="weui-msg__icon-area">
-            <icon type="info" size="93"></icon>
-        </view>
-        <view class="weui-msg__text-area">
-            <view class="weui-msg__title">欢迎使用共勉！</view>
-            <view class="weui-msg__desc">加入该群组则意味着您的头像、昵称等信息将会被读取。</view>
-        </view>
-        <view class="weui-msg__opr-area">
-            <view class="weui-btn-area">
-                <button class="weui-btn" type="primary" bindtap=''>开始使用</button>
-                
-            </view>
-        </view>
-        <view class="weui-msg__extra-area">
-            <view class="weui-footer">
-                
-                <view class="weui-footer__text">开发人员：朱柏锡等</view>
-            </view>
-        </view>
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="info" size="93"></icon>
     </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">欢迎使用共勉</view>
+      <view class="weui-msg__desc">
+        共勉需要您理解并同意我们手机您的公开信息
+      </view>
+      <view class="weui-msg__desc">
+        <view class="usage_head">
+          该信息将会在下列环境下使用:
+        </view>
+        <view class="usage">
+          <view>- 若您不是群组管理员，该信息用于群组管理员分配、管理任务</view>
+          <view>- 若您是群组管理员，该信息用于用户确认管理员信息</view>
+        </view>
+      </view>
+      <view class="weui-msg__desc">
+        请您在点击“开始使用”后，允许我们访问您的数据
+      </view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo='onGetUserInfo'>开始使用</button>
+
+      </view>
+    </view>
+    <view class="weui-msg__extra-area">
+      <view class="weui-footer">
+
+        <view class="weui-footer__text">
+          欢迎使用共勉
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

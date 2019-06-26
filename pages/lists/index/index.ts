@@ -20,7 +20,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.setData!({ lists: app.globalData.lists }, () => { this.drawRoundProgresses() })
+    wx.getSetting({
+      success: (p) => {
+        if (!p.authSetting["scope.userInfo"]) {
+          wx.redirectTo({
+            url: '/pages/welcome/welcome-first'
+          })
+        } else {
+          this.refreshPageData()
+        }
+      }, fail: () => {
+        wx.redirectTo({
+          url: '/pages/welcome/welcome-first'
+        })
+      }
+    })
   },
 
   /**
@@ -34,7 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData!({ lists: app.globalData.lists }, () => { this.drawRoundProgresses() })
+    this.refreshPageData()
   },
 
   /**
@@ -55,7 +69,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
@@ -90,14 +104,22 @@ Page({
           break
         // 删除
         case 1:
-        // TODO: 友好的提示
-          app.deleteListById (item.id)
-          this.onShow ()
+          // TODO: 友好的提示
+          app.deleteListById(item.id)
+          this.onShow()
           break
         default:
           console.error("触发不可能路径")
       }
     }).catch(() => { console.log("ActionSheet Canceled") })
+  },
+
+  refreshPageData: function () {
+    this.setData!(
+      { lists: app.globalData.lists },
+      () => {
+        this.drawRoundProgresses()
+      })
   },
 
   /**

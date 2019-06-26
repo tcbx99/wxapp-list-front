@@ -1,25 +1,31 @@
 <!--pages/welcome/welcome-list.wxml-->
 <view class="page">
-    <view class="weui-msg">
-        <view class="weui-msg__icon-area">
-            <icon type="warn" size="93" color="#FFBE00"></icon>
-        </view>
-        <view class="weui-msg__text-area">
-            <view class="weui-msg__title">欢迎加入{{name}}群组！</view>
-            <view class="weui-msg__desc">群组简介：{{text}}</view>
-            <view class="weui-msg__desc">加入该群组则意味着您的头像、昵称等信息将会被群组管理员读取。</view>
-        </view>
-        <view class="weui-msg__opr-area">
-            <view class="weui-btn-area">
-                <button class="weui-btn" type="primary" bindtap=''>加入群组</button>
-                
-            </view>
-        </view>
-        <view class="weui-msg__extra-area">
-            <view class="weui-footer">
-                
-                <view class="weui-footer__text">欢迎开始使用{{name}}群组！</view>
-            </view>
-        </view>
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93" color="#FFBE00"></icon>
     </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">欢迎加入{{name}}群组！</view>
+      <view class="weui-msg__desc">群组简介：{{text}}</view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo='onGetUserInfo'>加入群组</button>
+
+      </view>
+    </view>
+    <view class="weui-msg__extra-area">
+      <view class="weui-footer">
+        <view class="weui-footer__text">
+          您需要允许小程序获得您的公开信息
+        </view>
+        <view class="weui-footer__text">
+          该信息将分享给管理员用于任务的管理和分配
+        </view>
+        <view class="weui-footer__text">
+          您的公开信息对群组中其他用户不可见
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

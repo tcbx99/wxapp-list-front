@@ -1,2 +1,12 @@
 /* pages/welcome/welcome-first.wxss */
 @import "/styles/weui.wxss";
+
+.usage_head {
+  text-align: left;
+  padding-left: 10%;
+}
+
+.usage {
+  text-align: left;
+  padding-left: 15%;
+}
