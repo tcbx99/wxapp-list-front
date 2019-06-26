@@ -66,5 +66,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  back: function () {
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
   }
 })

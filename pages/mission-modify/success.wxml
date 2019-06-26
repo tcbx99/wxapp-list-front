@@ -12,8 +12,8 @@
         </view>
         <view class="weui-msg__opr-area">
             <view class="weui-btn-area">
-                <button class="weui-btn" type="primary">发送链接到群</button>
-                <button class="weui-btn" type="default">返回主界面</button>
+                <button class="weui-btn" type="primary" open-type='share'>发送链接到群</button>
+                <button class="weui-btn" type="default" bindtap="back">返回主界面</button>
             </view>
         </view>
     </view>
