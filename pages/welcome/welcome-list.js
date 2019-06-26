@@ -1,4 +1,4 @@
-// pages/mission-modify/success.js
+// pages/welcome/welcome-list.js
 Page({
 
   /**
@@ -6,18 +6,14 @@ Page({
    */
   data: {
     name: null,
-    nameArray:[]
+    text: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      name: options.name,
-      nameArray: options.nameArray
-    });
-    //console.log(this.data.nameArray);
+
   },
 
   /**
@@ -67,11 +63,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  back: function () {
-    wx.navigateTo({
-      url: '/pages/index/index',
-    })
   }
 })

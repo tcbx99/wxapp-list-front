@@ -44,8 +44,6 @@ Page({
         }
       })
     }
-    // wx.redirectTo({ url: '/pages/list-modify/list-modify' })
-    // wx.redirectTo({ url: '/pages/lists/index/index' })
   },
 
   getUserInfo(e: any) {

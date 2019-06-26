@@ -101,7 +101,7 @@ Page({
       list.name = this.data.list.name
       list.text = this.data.list.text
       list.id = app.globalData.last_list_id++
-      list.is_create = true
+      list.is_admin = true
       this.setData({list: list});
     }
     // 修改逻辑之后

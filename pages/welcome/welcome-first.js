@@ -1,23 +1,18 @@
-// pages/mission-modify/success.js
+// pages/welcome/welcome-first.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: null,
-    nameArray:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      name: options.name,
-      nameArray: options.nameArray
-    });
-    //console.log(this.data.nameArray);
+
   },
 
   /**
@@ -67,11 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  back: function () {
-    wx.navigateTo({
-      url: '/pages/index/index',
-    })
   }
 })

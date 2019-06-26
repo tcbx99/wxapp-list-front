@@ -1,1 +1,2 @@
 /* pages/mission-modify/success.wxss */
+@import "/styles/weui.wxss";

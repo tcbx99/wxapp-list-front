@@ -6,7 +6,13 @@
     "pages/list-modify/list-modify",
     "pages/list-modify/success",
     "pages/mission-modify/mission-modify",
+<<<<<<< HEAD
     "pages/mission-modify/success"
+=======
+    "pages/mission-modify/success",
+    "pages/welcome/welcome-list",
+    "pages/welcome/welcome-first"
+>>>>>>> 2b6339e7aa9bef3f6eaec0154902b09fd6ab72c2
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",
