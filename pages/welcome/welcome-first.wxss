@@ -1,0 +1,2 @@
+/* pages/welcome/welcome-first.wxss */
+@import "/styles/weui.wxss";
