@@ -1,0 +1,8 @@
+/* pages/mission-modify/mission-modify.wxss */
+@import "/styles/weui.wxss";
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    width: 60%;
+}

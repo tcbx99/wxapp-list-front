@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/list-modify/list-modify",
-    "pages/list-modify/success"
+    "pages/list-modify/success",
+    "pages/mission-modify/mission-modify",
+    "pages/mission-modify/success"
   ],
   "window": {
     "backgroundTextStyle": "light",

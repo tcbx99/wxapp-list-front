@@ -1,1 +1,2 @@
 /* pages/list-modify/success.wxss */
+@import "/styles/weui.wxss";
