@@ -44,9 +44,7 @@ Page({
         }
       })
     }
-    wx.redirectTo({//进入我的页面，此时无跳转逻辑
-      url: '/pages/mission-modify/mission-modify',
-    })
+    wx.redirectTo({ url: '/pages/lists/index/index' })
   },
 
   getUserInfo(e: any) {

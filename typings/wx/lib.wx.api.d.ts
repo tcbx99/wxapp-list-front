@@ -4309,7 +4309,7 @@ declare namespace wx {
   }
 
   interface WX {
-
+    pro : any
     offLocalServiceDiscoveryStop(callback: () => void): void
     offLocalServiceFound(callback: () => void): void
     offLocalServiceLost(callback: () => void): void

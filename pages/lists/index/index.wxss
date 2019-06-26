@@ -1,0 +1,62 @@
+/* pages/lists/index/index.wxss */
+@import "/styles/weui.wxss";
+
+.ui-icon-more-area {
+  right: 0px;
+  height: 30px;
+  text-align: center;
+  width: 30px;
+}
+.ui-icon-more {
+  position: relative;
+  top: 5px;
+  width: 20px;
+}
+.ui--active {
+  background-color: #ECECEC !important; 
+}
+.font-gray-26 {
+  color: #888;
+  font-size: 26rpx;
+}
+
+/* 圆形进度条Canvas */
+.canvasBox{
+  height: 60px;
+  position: relative;
+}
+.bigCircle{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  background-color: #ddd;
+}
+.littleCircle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  background-color: #fff;
+}
+.canvas{
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto auto;
+  z-index: 4;
+}

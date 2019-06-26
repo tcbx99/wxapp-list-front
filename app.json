@@ -2,15 +2,16 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
+    "pages/lists/index/index",
     "pages/list-modify/list-modify",
     "pages/list-modify/success",
     "pages/mission-modify/mission-modify",
     "pages/mission-modify/success"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#5495E6",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "backgroundColor": "#f8f8f8",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   }
 }
