@@ -30,9 +30,9 @@ export class RoundProgress {
         console.log (round_from + ' ' + round_to)
         ctx.arc (x, y, r, round_from, round_to)
         // 设定颜色宽度
-        ctx.setStrokeStyle (that.color)
-        ctx.setLineWidth (that.width)
-        ctx.setLineCap ("butt")
+        ctx.strokeStyle = that.color
+        ctx.lineWidth = that.width
+        ctx.lineCap = 'butt'
         // 绘制
         ctx.stroke ()
         ctx.draw (()=>{}, true)

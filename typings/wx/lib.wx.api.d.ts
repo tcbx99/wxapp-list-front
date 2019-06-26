@@ -206,7 +206,7 @@ declare namespace wx {
     /** 线条的端点样式。用法同 [CanvasContext.setLineCap()]((CanvasContext.setLineCap))。
      *
      * 最低基础库： `1.9.90` */
-    lineCap: number;
+    lineCap: string;
     /** 线条的交点样式。用法同 [CanvasContext.setLineJoin()]((CanvasContext.setLineJoin))。
      *
      * 最低基础库： `1.9.90` */

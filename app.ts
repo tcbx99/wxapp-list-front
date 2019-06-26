@@ -1,13 +1,31 @@
 //app.ts
+import { IList } from './utils/types'
+import { ListSeeder } from './utils/testing/list_seeder'
+
 export interface IMyApp {
+  getListById(id: number): IList,
+  putList(list: IList): void,
+  deleteListById(id: number):void,
   userInfoReadyCallback?(res: wx.UserInfo): void
   globalData: {
     userInfo?: wx.UserInfo
+    lists: Array<IList>
   }
 }
 
+var seedLine: Array<(app: IMyApp) => void> = [
+  // Seed Lists
+  (app) => {
+    app.globalData.lists = (new ListSeeder).seedManyTimes(20)
+  }
+]
+
 App<IMyApp>({
   onLaunch() {
+    // Seed Everything
+    for (var i in seedLine) {
+      seedLine[i](this)
+    }
     // 展示本地存储能力
     var logs: number[] = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -40,6 +58,33 @@ App<IMyApp>({
       }
     })
   },
+  getListById(id: number): IList {
+    for (var i in this.globalData.lists) {
+      if (this.globalData.lists[i].id == id) {
+        return this.globalData.lists[i]
+      }
+    }
+    throw new Error("不存在该清单ID")
+  },
+  putList(list: IList) {
+    for (var i in this.globalData.lists) {
+      if (this.globalData.lists[i].id == list.id) {
+        this.globalData.lists[i] = list
+        return
+      }
+    }
+    this.globalData.lists.push(list)
+  },
+  deleteListById(id:number):void {
+    for (var i in this.globalData.lists) {
+      if (this.globalData.lists[i].id == id) {
+        this.globalData.lists.splice(+i,1)
+        return
+      }
+    }
+  },
   globalData: {
+    lists: [],
+    last_list_id: 21
   }
 })

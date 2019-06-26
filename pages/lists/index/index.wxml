@@ -4,7 +4,7 @@
   <collapse title="我创建的清单" action-text="新建" bindtapaction="onCreateList">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <navigator wx:for='{{ lists.owned }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <navigator wx:for='{{ lists }}' wx:key="id" wx:for-index="idx" wx:for-item='item' wx:if="{{ item.is_admin }}" url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <!-- Canvas Circle Here -->
             <view class='canvasBox'>
@@ -28,7 +28,7 @@
   <collapse title="我加入的清单">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <navigator wx:for='{{ lists.joined }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <navigator wx:for='{{ lists }}' wx:key="id" wx:for-index="idx" wx:for-item='item' wx:if="{{ !item.is_admin }}" url="{{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <!-- Canvas Circle Here -->
             <view class='canvasBox'>

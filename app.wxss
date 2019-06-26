@@ -8,8 +8,12 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
-.page {
+page {
     background-color: #F8F8F8;
     font-size: 16px;
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.page__ft{
+    padding-bottom: 10px;
+    text-align: center;
 }
