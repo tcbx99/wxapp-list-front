@@ -4,7 +4,9 @@
     "pages/logs/logs",
     "pages/lists/index/index",
     "pages/list-modify/list-modify",
-    "pages/list-modify/success"
+    "pages/list-modify/success",
+    "pages/mission-modify/mission-modify",
+    "pages/mission-modify/success"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",
