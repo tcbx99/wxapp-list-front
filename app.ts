@@ -10,6 +10,7 @@ export interface IMyApp {
   globalData: {
     userInfo?: wx.UserInfo
     lists: Array<IList>
+    last_list_id: number
   }
 }
 
