@@ -7,7 +7,7 @@
       <view class="weui-label">群组名称</view>
     </view-->
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入群组名称" bindinput="name" value="{{list.name}}" />
+        <input class="weui-input" placeholder="请输入群组名称" bindinput="name" value="{{list.group_name}}" />
       </view>
     </view>
   </view>
@@ -16,7 +16,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" placeholder="请输入群组介绍" style="height: 6.3em" bindinput="text" value="{{list.text}}" />
+        <textarea class="weui-textarea" placeholder="请输入群组介绍" style="height: 6.3em" bindinput="text" value="{{list.group_desc}}" />
       </view>
     </view>
   </view>

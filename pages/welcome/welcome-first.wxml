@@ -7,7 +7,7 @@
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">欢迎使用共勉</view>
       <view class="weui-msg__desc">
-        共勉需要您理解并同意我们手机您的公开信息
+        共勉需要您理解并同意我们使用您的公开信息
       </view>
       <view class="weui-msg__desc">
         <view class="usage_head">

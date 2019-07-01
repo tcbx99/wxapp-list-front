@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的清单",
+  "navigationBarTitleText": "共勉",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "search-bar": "/components/search-bar/index",

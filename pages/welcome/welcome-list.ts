@@ -1,12 +1,17 @@
 // pages/welcome/welcome-list.ts
+import { IMyApp } from '../../app'
+
+const app = getApp<IMyApp>()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: null,
-    text: null
+    id: 0,
+    name: "",
+    text: ""
   },
 
   /**
@@ -14,7 +19,14 @@ Page({
    */
   onLoad: function (options: { id: string }) {
     // Option Never Use
-    console.log(options)
+    app.globalData.api!.joinGroupFlow(+options.id)
+      .then((r) => {
+        this.setData!({
+          id: +options.id,
+          name: r.group_name,
+          text: r.group_desc
+        })
+      })
   },
 
   /**
@@ -44,10 +56,14 @@ Page({
   onUnload: function () {
 
   },
+
   onGetUserInfo: function (e: any) {
     console.log(e)
     if (e.detail.userInfo) {
-      // 加入逻辑
+      app.onLaunch!()
+      app.globalData.api!.joinGroupConfirm(this.data.id)
+        .then(app.putList)
+        .then(() => { wx.redirectTo({ url: '/pages/lists/index/index' }) })
     } else {
       wx.showModal({
         title: "请授权获得公开信息",

@@ -8,7 +8,8 @@
     "pages/mission-modify/mission-modify",
     "pages/mission-modify/success",
     "pages/welcome/welcome-first",
-    "pages/welcome/welcome-list"
+    "pages/welcome/welcome-list",
+    "pages/lists/detail-view/detail-view"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",

@@ -6,7 +6,7 @@
     </view>
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">欢迎加入{{name}}群组！</view>
-      <view class="weui-msg__desc">群组简介：{{text}}</view>
+      <view class="weui-msg__desc">{{text ? "群组简介：" : "没有群组简介"}}{{text ? text : ""}}</view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">

@@ -1,6 +1,6 @@
-// pages/list-modify/success.js
+import { IMyApp } from '../../app'
 
-const app = getApp()
+const app = getApp<IMyApp>()
 
 Page({
 
@@ -17,15 +17,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function(options: any) {
     const list = app.getListById(options.id)
-    this.setData({
+    this.setData!({
       id: options.id,
-      name: list.name,
-      text: list.text
+      name: list.group_name,
+      text: list.group_desc
     })
-    if (options.type == 'modify') {
-      this.setData({
+    if (options["type"] == 'modify') {
+      this.setData!({
         type_name: '修改',
         is_create: false
       })
@@ -80,7 +80,7 @@ Page({
   /**
    * 分享逻辑
    */
-  onShareAppMessage: function(options) {
+  onShareAppMessage: function() {
     return {
       title: "邀请您加入" + this.data.name,
       path: "/pages/welcome/welcome-list?id=0"

@@ -1,16 +1,20 @@
 //app.ts
 import { IList } from './utils/types'
 import { ListSeeder } from './utils/testing/list_seeder'
+import { getApiFacade, IApiFacade, ApiEnvironment } from './models/api'
 
 export interface IMyApp {
   getListById(id: number): IList,
   putList(list: IList): void,
-  deleteListById(id: number):void,
+  deleteListById(id: number): void,
   userInfoReadyCallback?(res: wx.UserInfo): void
+  refreshLists(): void
   globalData: {
+    api?: IApiFacade
     userInfo?: wx.UserInfo
     lists: Array<IList>
     last_list_id: number
+    listUpdateCallback?: () => void
   }
 }
 
@@ -23,20 +27,23 @@ var seedLine: Array<(app: IMyApp) => void> = [
 
 App<IMyApp>({
   onLaunch() {
-    // Seed Everything
-    for (var i in seedLine) {
+    this.globalData.api = getApiFacade(ApiEnvironment.PROD)
+    // Seed Everything: No need to seed
+    /*for (var i in seedLine) {
       seedLine[i](this)
-    }
+    }*/
     // 展示本地存储能力
     var logs: number[] = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
     // 登录
+    var loginCode: string;
     wx.login({
       success(_res) {
         // console.log(_res.code)
         // 发送 _res.code 到后台换取 openId, sessionKey, unionId
+        loginCode = _res.code
       }
     })
     // 获取用户信息
@@ -53,6 +60,18 @@ App<IMyApp>({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res.userInfo)
               }
+              if (loginCode) {
+                // Login!
+                this.globalData.api && this.globalData.api.login(loginCode, res.userInfo).then(
+                  () => {
+                    // Get Groups!
+                    return this.globalData.api && this.globalData.api.getGroups().then((lists) => {
+                      this.globalData.lists = lists
+                    }).then(this.globalData.listUpdateCallback)
+                  }
+                )
+                console.log("Logining")
+              }
             }
           })
         }
@@ -61,7 +80,7 @@ App<IMyApp>({
   },
   getListById(id: number): IList {
     for (var i in this.globalData.lists) {
-      if (this.globalData.lists[i].id == id) {
+      if (this.globalData.lists[i].group_id == id) {
         return this.globalData.lists[i]
       }
     }
@@ -69,20 +88,27 @@ App<IMyApp>({
   },
   putList(list: IList) {
     for (var i in this.globalData.lists) {
-      if (this.globalData.lists[i].id == list.id) {
+      if (this.globalData.lists[i].group_id == list.group_id) {
         this.globalData.lists[i] = list
         return
       }
     }
     this.globalData.lists.push(list)
   },
-  deleteListById(id:number):void {
+  deleteListById(id: number): void {
     for (var i in this.globalData.lists) {
-      if (this.globalData.lists[i].id == id) {
-        this.globalData.lists.splice(+i,1)
+      if (this.globalData.lists[i].group_id == id) {
+        this.globalData.lists.splice(+i, 1)
         return
       }
     }
+  },
+  refreshLists(): void {
+    this.globalData.api && this.globalData.api.getGroups()
+      .then((r) => {
+        this.globalData.lists = r
+      })
+      .then(this.globalData.listUpdateCallback)
   },
   globalData: {
     lists: [],

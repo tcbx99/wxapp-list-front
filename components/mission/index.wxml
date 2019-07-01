@@ -1,0 +1,14 @@
+<!--components/mission-box/index.wxml-->
+<navigator name="mission" class="weui-cell_access weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+  <view class="ui-checkbox-area weui-media-box__hd weui-media-box__hd_in-appmsg">
+    <view class="ui-checkbox" hover-class="weui-cell_active" catchtap="onTap" hover-stop-propagation>
+      <icon type="circle" size="48" wx:if="{{!isChecked}}"></icon>
+      <icon type="success" size="48" wx:if="{{isChecked}}"></icon>
+    </view>
+  </view>
+  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">{{name}}</view>
+    <view class="weui-media-box__desc">{{desc}}</view>
+  </view>
+  <view class="weui_cell_ft weui-cell__ft_in-access" />
+</navigator>

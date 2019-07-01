@@ -10,10 +10,11 @@ export class ListSeeder extends SeederHelper<IList, null> {
     var pfc = seed.seedInt(0, 20)
     var fc = pfc + seed.seedInt(0, ac - pfc)
     var r: IList = {
-      id: this.id++,
-      name: seed.seedStringWithLengthFrom(seed.seedInt(1, 8), SEED),
-      text: seed.seedStringWithLengthFrom(seed.seedInt(0, 30), SEED),
-      items_info: {
+      group_id: this.id++,
+      group_name: seed.seedStringWithLengthFrom(seed.seedInt(1, 8), SEED),
+      group_desc: seed.seedStringWithLengthFrom(seed.seedInt(0, 30), SEED),
+      group_type: seed.seedInt(0,2),
+      missions_info: {
         personal_finished_count: pfc,
         finished_count: fc,
         all_count: ac

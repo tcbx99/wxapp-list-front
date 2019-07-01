@@ -1,0 +1,44 @@
+/* pages/lists/detail-view/detail-view.wxss */
+@import '/styles/weui.wxss';
+
+
+/* 圆形进度条Canvas */
+.canvasBox{
+  height: 60px;
+  position: relative;
+}
+.bigCircle{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  background-color: #ddd;
+}
+.littleCircle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  background-color: #f8f8f8;
+}
+.canvas{
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto auto;
+  z-index: 4;
+}

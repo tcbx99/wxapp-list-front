@@ -1,8 +1,9 @@
 export interface IList {
-  id: number,
-  name: string,
-  text?: string,
-  items_info: {
+  group_id: number,
+  group_name: string,
+  group_desc?: string,
+  group_type: number,
+  missions_info: {
     personal_finished_count: number,
     finished_count: number,
     all_count: number
@@ -10,20 +11,20 @@ export interface IList {
   is_admin: boolean
 }
 
-export enum TaskFinishType {
+export enum MissionFinishType {
   NOT_FINISHED = 0,
   FINISHED = 1,
   PASSED = 2
 }
 
-export interface ITask {
+export interface IMission {
   id: number,
   name: string,
   text?: string,
   assignee_info: {
-    openid: string,
+    id: number,
     name: string,
     avatar_url: string,
   }
-  finish_type: TaskFinishType
+  finish_type: MissionFinishType
 }
