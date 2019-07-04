@@ -4,11 +4,16 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    naviid: String,
     name: String,
     desc: String,
-    isChecked: {
+    admin: {
       type: Boolean,
       value: false
+    },
+    isChecked: {
+      type: Number,
+      value: 0
     }
   },
 
@@ -26,7 +31,7 @@ Component({
     onTap: function(e) {
       console.log(this.data)
       this.triggerEvent ('change',{
-        checked: !this.data.isChecked
+        checked: this.data.isChecked
       },{})
     }
   }

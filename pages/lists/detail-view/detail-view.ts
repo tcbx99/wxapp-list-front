@@ -1,8 +1,10 @@
 // pages/lists/detail-view/detail-view.js
 import { IMyApp } from "../../../app"
 import { RoundProgress } from '../../../utils/round_progress'
+import { IApiFacade } from '../../../models/api'
 
 const app = getApp<IMyApp>();
+var api: IApiFacade = app.globalData.api!
 
 Page({
 
@@ -13,10 +15,10 @@ Page({
     group: {},
     lists: [
       {
-        id: 1,
-        name: "a",
-        text: "b",
-        checked: false
+        mission_id: 1,
+        mission_name: "a",
+        mission_desc: "b",
+        finish_type: 0
       }
     ],
     is_admin: true
@@ -27,8 +29,16 @@ Page({
    */
   onLoad: function (options: { id: string }) {
     var list = app.getListById(+options.id)
-    this.setData!({ group: list, is_admin: list.is_admin })
-    this.doDraw()
+    this.setData!({ group: list, is_admin: list.is_admin}, ()=>{
+      console.log('onLoad')
+      this.doDraw()
+      wx.setNavigationBarTitle({ title: list.group_name })
+      api.getMissions(+options.id, list.is_admin).then((r) => {
+      this.setData!({
+        lists: r
+      })
+      })
+    })
   },
 
   /**
@@ -74,20 +84,75 @@ Page({
   },
 
   onChange: function (e: any) {
+    console.log(e);
     var lists = this.data.lists
     for (var i in lists) {
-      if (lists[i].id == e.currentTarget.dataset.id) {
-        lists[i].checked = e.detail.checked
-        break
+      if (lists[i].mission_id == +e.currentTarget.dataset.id) {
+        // Here is the real logic
+        if (lists[i].finish_type == 1 && this.data.is_admin) {
+          // Here is the reject Logic
+          new Promise((r) => {
+            wx.showModal({
+              title: "",
+              content: "确定要驳回此任务的完成状态吗？此操作不可撤销",
+              success: r
+            })
+          }).then((r: any) => {
+            if (r.confirm) {
+              // Real thing
+              return api.rejectMission(<any>lists[i]).then(() => {
+                lists[i].finish_type = -1
+                this.setData!({ lists: lists })
+              })
+            }
+            return r;
+          })
+        }
+        if (lists[i].finish_type != 1 && !this.data.is_admin) {
+          // Here is the complete Logic
+          new Promise((r) => {
+            wx.showModal({
+              title: "",
+              content: "确定要将此任务状态更改为已完成吗？此操作不可撤销",
+              success: r
+            })
+          }).then((r: any) => {
+            if (r.confirm) {
+              // Real thing
+              return api.completeMission(<any>lists[i]).then(() => {
+                lists[i].finish_type = 1
+                this.setData!({ lists: lists })
+              })
+            }
+            return r;
+          })
+        }
+        // Finally, Break the FOR loop
+        break;
       }
     }
-    this.setData!({
-      lists: lists
+  },
+  onDeleteCompletedMissions:function(){
+    api.deleteAllDone(<any>this.data.group)
+    .then(()=>{
+      var lists = this.data.lists
+      var new_list = []
+      for (var i of lists){
+        if(i.finish_type!=1){
+          new_list.push(i)
+        }
+      }
+      this.setData!({lists: new_list})
     })
   },
 
+  onCreateMission: function () {
+    wx.navigateTo({ url: "/pages/mission-modify/mission-modify" })
+  },
+
   doDraw: function () {
-    var item: any = this.data.group
+    var item:any = this.data.group
+    console.log(item)
     // RP1: 个人贡献，暂定绿色
     var round_me = new RoundProgress('rp', 8)
     // RP2: 除个人之外的贡献，暂定红色
@@ -95,8 +160,8 @@ Page({
     round_me.precentage_from = 0
     round_me.precentage_to
       = round_all.precentage_from
-      = item.missions_info.personal_finished_count / item.missions_info.all_count * 100
-    round_all.precentage_to = item.missions_info.finished_count / item.missions_info.all_count * 100
+      = item.mission_info.personal_finished_count / item.mission_info.all_count * 100
+    round_all.precentage_to = item.mission_info.finished_count / item.mission_info.all_count * 100
     // 
     round_me.color = 'green'
     // 

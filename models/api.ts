@@ -1,4 +1,4 @@
-import { IList } from '../utils/types'
+import { IList, IMission } from '../utils/types'
 
 export interface IApiFacade {
   login(code: string, u: wx.UserInfo): Promise<LoginResponse>
@@ -8,6 +8,12 @@ export interface IApiFacade {
   joinGroupFlow(id: number): Promise<{ group_name: string, group_desc: string }>
   joinGroupConfirm(id: number): Promise<IList>
   getGroups(): Promise<Array<IList>>
+  getMembersByGroup(id: number): Promise<Array<{ member_id: number, nickname: string }>>
+  createMission(mission: IMission): Promise<IMission>
+  completeMission(mission: IMission): Promise<any>
+  rejectMission(mission: IMission): Promise<any>
+  deleteAllDone(group: IList): Promise<any>
+  getMissions(group_id: number, is_admin: boolean): Promise<Array<IMission>>
 }
 
 interface LoginResponse {
@@ -15,60 +21,7 @@ interface LoginResponse {
   user_id: number
 }
 
-class MockApiFacade implements IApiFacade {
-  dummy_group_id: number = 1
-  login(): Promise<LoginResponse> {
-    return new Promise<LoginResponse>((r) => { r({ token: "dummy", user_id: 1 }) })
-  }
-  createGroup(name: string, desc: string, gType: number): Promise<IList> {
-    return new Promise<IList>((r) => {
-      r({
-        group_id: this.dummy_group_id++,
-        group_name: name,
-        group_desc: desc,
-        group_type: gType,
-        missions_info: {
-          personal_finished_count: 0,
-          finished_count: 20,
-          all_count: 50
-        },
-        is_admin: true
-      })
-    })
-  }
-  updateGroup(list: IList): Promise<IList> {
-    return new Promise<IList>((r) => {
-      r(list)
-    })
-  }
-  deleteGroup(): Promise<void> { return new Promise<void>((r) => { r() }) }
-  joinGroupFlow(): Promise<{ group_name: string, group_desc: string }> {
-    return new Promise((r) => {
-      r({ group_name: "测试", group_desc: "某某坤就是傻逼" })
-    })
-  }
-  joinGroupConfirm(id: number): Promise<IList> {
-    return new Promise((r) => {
-      r({
-        group_id: id,
-        group_name: "测试",
-        group_desc: "某某坤就是傻逼",
-        group_type: 0,
-        missions_info: {
-          personal_finished_count: 0,
-          finished_count: 20,
-          all_count: 50
-        },
-        is_admin: false
-      })
-    })
-  }
-  getGroups(): Promise<Array<IList>> {
-    return new Promise((r) => { r([]) });
-  }
-}
-
-const APP_BASE = "http://localhost:8080/"
+const APP_BASE = "https://list2-wxapp.tcbx99.cn/"
 
 class ApiFacade implements IApiFacade {
   token = ''
@@ -84,6 +37,7 @@ class ApiFacade implements IApiFacade {
   }
 
   login(code: string, u: wx.UserInfo): Promise<LoginResponse> {
+    console.log("What")
     return this.promisify(wx.request, {
       url: APP_BASE + 'login',
       method: 'POST',
@@ -103,7 +57,7 @@ class ApiFacade implements IApiFacade {
   }
   createGroup(name: string, desc: string, gType: number): Promise<IList> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'createGroup' + '&user_id=' + this.user_id,
+      url: APP_BASE + 'createGroup' + '?user_id=' + this.user_id,
       method: 'POST',
       data: {
         group_name: name,
@@ -116,7 +70,7 @@ class ApiFacade implements IApiFacade {
   }
   updateGroup(list: IList): Promise<IList> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'createGroup' + '&user_id=' + this.user_id,
+      url: APP_BASE + 'createGroup' + '?user_id=' + this.user_id,
       method: 'POST',
       data: {
         group_name: list.group_name,
@@ -130,7 +84,7 @@ class ApiFacade implements IApiFacade {
   deleteGroup(): Promise<void> { return new Promise<void>((r) => { r() }) }
   joinGroupFlow(id: number): Promise<{ group_name: string, group_desc: string }> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'joinGroupFlow' + '&user_id=' + this.user_id,
+      url: APP_BASE + 'joinGroupFlow' + '?user_id=' + this.user_id,
       method: 'POST',
       data: {
         group_id: id
@@ -141,7 +95,7 @@ class ApiFacade implements IApiFacade {
   }
   joinGroupConfirm(id: number): Promise<IList> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'joinGroupConfirm' + '&user_id=' + this.user_id,
+      url: APP_BASE + 'joinGroupConfirm' + '?user_id=' + this.user_id,
       method: 'POST',
       data: {
         group_id: id
@@ -152,16 +106,69 @@ class ApiFacade implements IApiFacade {
   }
   getGroups(): Promise<Array<IList>> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'getGroups' + '&user_id=' + this.user_id,
+      url: APP_BASE + 'getGroups' + '?user_id=' + this.user_id,
       method: 'GET',
     }).then((r: any) => {
       return <any>r.data;
     })
   }
+  createMission(mission: IMission): Promise<IMission> {
+    return this.promisify(wx.request, {
+      url: APP_BASE + 'createMission' + '?user_id=' + this.user_id,
+      method: 'POST',
+      data: mission
+    }).then((r: any) => {
+      return <any>r.data;
+    })
+  }
+  completeMission(mission: IMission): Promise<any> {
+    return this.promisify(wx.request, {
+      url: APP_BASE + 'completeMission' + '?user_id=' + this.user_id,
+      method: 'POST',
+      data: mission.mission_id
+    })
+  }
+  rejectMission(mission: IMission): Promise<any> {
+    return this.promisify(wx.request, {
+      url: APP_BASE + 'rejectMission' + '?user_id=' + this.user_id,
+      method: 'POST',
+      data: mission.mission_id
+    })
+  }
+  deleteAllDone(group: IList): Promise<any> {
+    return this.promisify(wx.request, {
+      url: APP_BASE + 'clearMissions' + '?user_id=' + this.user_id,
+      method: 'POST',
+      data: group.group_id
+    })
+  }
+  getMissions(group_id: number, is_admin: boolean): Promise<Array<IMission>> {
+    if (is_admin) {
+      return this.promisify(wx.request, {
+        url: APP_BASE + 'getMissionsForGroup' + '?user_id=' + this.user_id,
+        method: 'POST',
+        data: group_id
+      }).then(r=>r.data)
+    } else {
+      return this.promisify(wx.request, {
+        url: APP_BASE + 'getMissionsForUser' + '?user_id=' + this.user_id,
+        method: 'POST',
+        data: group_id
+      }).then(r => r.data)
+    }
+  }
+  getMembersByGroup(id: number): Promise<Array<{ member_id: number, nickname: string }>> {
+    return this.promisify(wx.request, {
+      url: APP_BASE + 'getMemberByGroup' + '?user_id=' + this.user_id,
+      method: 'POST',
+      data: id
+    }).then((r: any) => {
+      return r.data
+    })
+  }
 }
 
-export enum ApiEnvironment { DEBUG, PROD }
 
-export function getApiFacade(env: ApiEnvironment): IApiFacade {
-  return env == ApiEnvironment.DEBUG ? new MockApiFacade() : new ApiFacade();
+export function getApiFacade(): IApiFacade {
+  return new ApiFacade();
 }

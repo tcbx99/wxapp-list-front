@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "collapse": "/components/collapse/index",
-    "mission": "/components/mission/index"
+    "mission": "/components/mission/index",
+    "collapse-red": "/components/collapse-red/index"
   }
 }

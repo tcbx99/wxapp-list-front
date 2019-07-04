@@ -3,7 +3,7 @@ export interface IList {
   group_name: string,
   group_desc?: string,
   group_type: number,
-  missions_info: {
+  mission_info: {
     personal_finished_count: number,
     finished_count: number,
     all_count: number
@@ -14,17 +14,12 @@ export interface IList {
 export enum MissionFinishType {
   NOT_FINISHED = 0,
   FINISHED = 1,
-  PASSED = 2
+  REJECTED = -1
 }
 
 export interface IMission {
-  id: number,
-  name: string,
-  text?: string,
-  assignee_info: {
-    id: number,
-    name: string,
-    avatar_url: string,
-  }
+  mission_id: number,
+  mission_name: string,
+  mission_desc?: string,
   finish_type: MissionFinishType
 }

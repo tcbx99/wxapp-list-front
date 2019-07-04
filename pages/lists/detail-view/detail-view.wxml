@@ -1,6 +1,6 @@
 <!--pages/lists/detail-view/detail-view.wxml-->
 <view class='page'>
-  <view class="weui-media-box weui-media-box_appmsg" hover-class="{{is_admin ? 'weui-cell_active' : 'none'}}">
+  <view class="weui-media-box weui-media-box_appmsg">
     <!-- 群组标题 -->
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
       <!-- Canvas Circle Here -->
@@ -15,7 +15,6 @@
       <view class="weui-media-box__title">{{group.group_name}}</view>
       <view class="weui-media-box__desc">{{group.group_desc}}</view>
     </view>
-    <view wx:if="{{is_admin}}" class="weui_cell_ft weui-cell__ft_in-access" />
   </view>
   <scroll-view scroll-y style="height: 100%">
     <!-- 任务列表：正在完成的任务 -->
@@ -23,20 +22,20 @@
       <view class="weui-panel weui-panel_access">
         <view class="weui-panel__bd">
           <view wx:for='{{ lists }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}">
-            <mission wx:if="{{!item.checked}}" name="{{item.name}}" desc="{{item.text}}" is-checked="{{item.checked}}" bindchange="onChange" data-id="{{item.id}}" />
+            <mission wx:if="{{item.finish_type != 1}}" naviid="{{item.mission_id}}" name="{{item.mission_name}}" desc="{{item.mission_desc}}" is-checked="{{item.finish_type}}" bindchange="onChange" data-id="{{item.mission_id}}" admin="{{is_admin}}"/>
           </view>
         </view>
       </view>
     </collapse>
     <!-- 任务列表：已完成的任务 -->
-    <collapse title="已完成的任务">
+    <collapse-red title="已完成的任务" action-text="{{is_admin ? '删除已完成任务' : ''}}" bindtapaction="onDeleteCompletedMissions">
       <view class="weui-panel weui-panel_access">
         <view class="weui-panel__bd">
           <view wx:for='{{ lists }}' wx:key="id" wx:for-index="idx" wx:for-item='item' url="{{item.id}}">
-            <mission wx:if="{{item.checked}}" name="{{item.name}}" desc="{{item.text}}" is-checked="{{item.checked}}" bindchange="onChange" data-id="{{item.id}}" />
+            <mission wx:if="{{item.finish_type == 1}}" naviid="{{item.mission_id}}" name="{{item.mission_name}}" desc="{{item.mission_desc}}" is-checked="{{item.finish_type}}" bindchange="onChange" data-id="{{item.mission_id}}" admin="{{is_admin}}"/>
           </view>
         </view>
       </view>
-    </collapse>
+    </collapse-red>
   </scroll-view>
 </view>

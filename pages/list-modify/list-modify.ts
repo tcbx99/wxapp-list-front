@@ -95,6 +95,15 @@ Page({
     this.data.list.group_desc = e.detail.value;
   },
 
+  bindPickerChange(e:any){
+    console.log(e)
+    this.setData!({
+      list: {
+        group_type: +e.detail.value
+      }
+    })
+  },
+
   open: function () {
     var that = this;
     // Filter
@@ -126,9 +135,9 @@ Page({
       list.id = app.globalData.last_list_id++
       list.is_admin = true
       this.setData!({ list: list });*/
-      promise = app.globalData.api!.createGroup(this.data.list.group_name, this.data.list.group_desc, this.data.list.group_type)
+      promise = app.globalData.api!.createGroup(this.data.list.group_name, this.data.list.group_desc, this.data.list.group_type).then((r)=>{this.data.list.group_id = r.group_id;return r})
     } else {
-      promise = app.globalData.api!.updateGroup(this.data.list)
+      promise = app.globalData.api!.updateGroup(<any>this.data.list)
     }
     // 修改逻辑之后
     promise.then(app.putList)

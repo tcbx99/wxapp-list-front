@@ -58,12 +58,22 @@ Page({
   },
 
   onGetUserInfo: function (e: any) {
+    var that = this;
     console.log(e)
     if (e.detail.userInfo) {
-      app.onLaunch!()
-      app.globalData.api!.joinGroupConfirm(this.data.id)
-        .then(app.putList)
-        .then(() => { wx.redirectTo({ url: '/pages/lists/index/index' }) })
+      wx.login({
+        success(_res) {
+          // console.log(_res.code)
+          // 发送 _res.code 到后台换取 openId, sessionKey, unionId
+          app.globalData.api!.login(_res.code, e.detail.userInfo)
+            .then(() => {
+              console.log("Login that: ",that)
+              return app.globalData.api!.joinGroupConfirm(that.data.id)
+                .then(app.putList)
+                .then(() => { wx.redirectTo({ url: '/pages/lists/index/index' }) })
+            })
+        }
+      })
     } else {
       wx.showModal({
         title: "请授权获得公开信息",

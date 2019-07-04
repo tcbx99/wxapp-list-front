@@ -1,0 +1,38 @@
+<view class='page'>
+  <view class="weui-cells__title">任务信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">任务名称</view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="weui-input"> {{list.mission_name}} </view>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">任务状态</view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="weui-input" style="color: {{ ['red', 'black', 'green'][list.finish_type + 1] }}">
+          {{ ['被驳回', '未完成', '已完成'][list.finish_type + 1] }}
+        </view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{ (!admin) && list.finish_type != 1 }}">
+        <view class="weui-vcode-btn" bindtap="onFinishMission">设为已完成</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{ admin && list.finish_type == 1 }}">
+        <view class="weui-vcode-btn" style="color: red" bindtap="onRejectMission">驳回此任务</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">任务介绍</view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-textarea" style="height: 6.3em"> {{list.mission_desc}} </view>
+      </view>
+    </view>
+  </view>
+</view>

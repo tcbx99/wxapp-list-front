@@ -130,6 +130,7 @@ Page({
   drawRoundProgresses: function () {
     console.log("Start drawing canvases")
     var doDraw = function (item: IList) {
+      if (item.mission_info.all_count > 0){
       console.log(item)
       // RP1: 个人贡献，暂定绿色
       var round_me = new RoundProgress('rp_' + item.group_id, 8)
@@ -138,8 +139,8 @@ Page({
       round_me.precentage_from = 0
       round_me.precentage_to
         = round_all.precentage_from
-        = item.missions_info.personal_finished_count / item.missions_info.all_count * 100
-      round_all.precentage_to = item.missions_info.finished_count / item.missions_info.all_count * 100
+        = item.mission_info.personal_finished_count / item.mission_info.all_count * 100
+      round_all.precentage_to = item.mission_info.finished_count / item.mission_info.all_count * 100
       // 
       round_me.color = 'green'
       // 
@@ -147,7 +148,7 @@ Page({
       console.log(round_me, round_all)
       round_me.draw()
       round_all.draw()
-    }
+    }}
     for (var i in this.data.lists) {
       doDraw(this.data.lists[i])
       console.log('Drawing Canvas #' + i)

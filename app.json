@@ -9,12 +9,13 @@
     "pages/mission-modify/success",
     "pages/welcome/welcome-first",
     "pages/welcome/welcome-list",
-    "pages/lists/detail-view/detail-view"
+    "pages/lists/detail-view/detail-view",
+    "pages/mission-details/mission-details"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f8f8f8",
     "backgroundColor": "#f8f8f8",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "共勉",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"
