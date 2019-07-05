@@ -21,14 +21,6 @@ App<IMyApp>({
   onLaunch() {
     this.globalData.api = getApiFacade()
     console.log(1)
-    // Seed Everything: No need to seed
-    /*for (var i in seedLine) {
-      seedLine[i](this)
-    }*/
-    // 展示本地存储能力
-    var logs: number[] = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
 
     // 登录
     var loginCode: string;

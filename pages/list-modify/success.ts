@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:0,
     name: null,
     text: null,
     type_name: '创建',
@@ -85,7 +86,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: "邀请您加入" + this.data.name,
-      path: "/pages/welcome/welcome-list?id=0"
+      path: "/pages/welcome/welcome-list?id=" + this.data.id
     }
   },
 

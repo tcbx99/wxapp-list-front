@@ -70,7 +70,7 @@ class ApiFacade implements IApiFacade {
   }
   updateGroup(list: IList): Promise<IList> {
     return this.promisify(wx.request, {
-      url: APP_BASE + 'createGroup' + '?user_id=' + this.user_id,
+      url: APP_BASE + 'updateGroup' + '?user_id=' + this.user_id,
       method: 'POST',
       data: {
         group_name: list.group_name,

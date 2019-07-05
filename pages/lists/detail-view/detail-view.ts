@@ -14,12 +14,6 @@ Page({
   data: {
     group: {},
     lists: [
-      {
-        mission_id: 1,
-        mission_name: "a",
-        mission_desc: "b",
-        finish_type: 0
-      }
     ],
     is_admin: true
   },
@@ -45,14 +39,24 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var list = app.getListById((<any>this.data.group).group_id)
+    this.setData!({ group: list, is_admin: list.is_admin }, () => {
+      console.log('onLoad')
+      this.doDraw()
+      wx.setNavigationBarTitle({ title: list.group_name })
+      api.getMissions((<any>this.data.group).group_id, list.is_admin).then((r) => {
+        this.setData!({
+          lists: r
+        })
+      })
+    })
   },
 
   /**
@@ -73,7 +77,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onPullDownRefresh();
+    wx.stopPullDownRefresh({});
   },
 
   /**
@@ -85,7 +90,7 @@ Page({
 
   onChange: function (e: any) {
     console.log(e);
-    var lists = this.data.lists
+    var lists:Array<any> = this.data.lists
     for (var i in lists) {
       if (lists[i].mission_id == +e.currentTarget.dataset.id) {
         // Here is the real logic
@@ -103,6 +108,10 @@ Page({
               return api.rejectMission(<any>lists[i]).then(() => {
                 lists[i].finish_type = -1
                 this.setData!({ lists: lists })
+                var mi: any = (<any>this.data.group).mission_info
+                mi.finished_count--
+                app.putList(<any>this.data.group)
+                this.doDraw()
               })
             }
             return r;
@@ -122,6 +131,11 @@ Page({
               return api.completeMission(<any>lists[i]).then(() => {
                 lists[i].finish_type = 1
                 this.setData!({ lists: lists })
+                var mi:any = (<any>this.data.group).mission_info
+                mi.personal_finished_count++
+                mi.finished_count++
+                app.putList(<any>this.data.group)
+                this.doDraw()
               })
             }
             return r;
@@ -135,8 +149,8 @@ Page({
   onDeleteCompletedMissions:function(){
     api.deleteAllDone(<any>this.data.group)
     .then(()=>{
-      var lists = this.data.lists
-      var new_list = []
+      var lists:Array<any> = this.data.lists
+      var new_list:Array<any> = []
       for (var i of lists){
         if(i.finish_type!=1){
           new_list.push(i)
@@ -152,6 +166,8 @@ Page({
 
   doDraw: function () {
     var item:any = this.data.group
+    if (item.mission_info.all_count == 0){ return }
+
     console.log(item)
     // RP1: 个人贡献，暂定绿色
     var round_me = new RoundProgress('rp', 8)
